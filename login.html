@@ -79,8 +79,8 @@
     document.getElementById('login-form').addEventListener('submit', function (e) {
       e.preventDefault();
       alert('Login successful!');
-      <?php
-//Backend connection
+     <?php
+
 $servername = "sql8.freesqldatabase.com";
 $username = "sql8756111";
 $password = "HQLkYCyuCD";
@@ -94,30 +94,20 @@ if (!$conn) {
 
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $regUsername = $_POST['username'];
-    $regPassword = $_POST['password'];
+    $loginUsername = $_POST['username'];
+    $loginPassword = $_POST['password'];
 
-  
-    $checkQuery = "SELECT * FROM users WHERE username='$regUsername'";
-    $checkResult = mysqli_query($conn, $checkQuery);
+    
+    $loginQuery = "SELECT * FROM users WHERE username='$loginUsername' AND password='$loginPassword'";
+    $loginResult = mysqli_query($conn, $loginQuery);
 
-    if (mysqli_num_rows($checkResult) > 0) {
-        echo "Username already exists.";
+    if (mysqli_num_rows($loginResult) > 0) {
+        echo "Login successful!";
     } else {
-       
-        $insertQuery = "INSERT INTO users (username, password) VALUES ('$regUsername', '$regPassword')";
-        $insertResult = mysqli_query($conn, $insertQuery);
-
-        if ($insertResult) {
-            echo "Registration successful!";
-        } else {
-            echo "Error: " . $insertQuery . "<br>" . mysqli_error($conn);
-        }
+        echo "Invalid username or password.";
     }
 }
 
-mysqli_close($conn);
-?>
     });
   </script>
 </body>
