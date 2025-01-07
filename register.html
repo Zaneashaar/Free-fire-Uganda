@@ -87,15 +87,16 @@ $username = "sql8756111";
 $password = "HQLkYCyuCD";
 $dbname = "sql8756111";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect( sql8.freesqldatabase.com, sql875611, $HQLkYCyuCD, sql8756111);
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST['username']) && isset($_POST['email'])&& isset($_POST['password'])) {
     $regUsername = $_POST['username'];
+    $regEmail = $_POST['email'];
     $regPassword = $_POST['password'];
 
   
@@ -106,7 +107,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         echo "Username already exists.";
     } else {
        
-        $insertQuery = "INSERT INTO users (username, password) VALUES ('$regUsername', '$regPassword')";
+        $insertQuery = "INSERT INTO users (username, email, password) VALUES ('$regUsername', '$regEmail', '$regPassword')";
         $insertResult = mysqli_query($conn, $insertQuery);
 
         if ($insertResult) {
